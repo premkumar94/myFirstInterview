@@ -1,0 +1,101 @@
+
+<style type="text/css">
+	div {
+  margin:0 auto;
+  width:398px
+}
+input {
+  margin-bottom:3px;
+  padding:10px;
+  width: 100%;
+  border:1px solid #CCC
+}
+button {
+  padding:10px
+}
+label {
+  cursor:pointer
+}
+#form-switch {
+  display:none
+}
+#register-form {
+  display:none
+}
+#form-switch:checked~#register-form {
+  display:block
+}
+#form-switch:checked~#login-form {
+  display:none
+}
+</style>
+
+
+
+
+<h1 style="text-align: center;">Login & Register</h1>
+
+
+
+
+
+<input type='checkbox' id='form-switch'>
+
+
+<div id='login-form' >
+  <%= form_tag sessions_path do  %>
+
+  		<%= label_tag :email%>:
+		<%= email_field_tag :email %>
+
+		<%= label_tag :password%>:
+		<%= password_field_tag :password %>
+
+		<%= submit_tag "Sign In" %>
+
+  <% end  %>
+  <label for='form-switch'><span>Register</span></label>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<% if flash[:errors] %>
+<div id="row">
+	<% flash[:errors].each do |e| %>
+		<%= e %>	
+		<br>
+	<% end %>	
+</div>
+<% end %>
+
+<div id='register-form'>
+
+
+	<%= form_for @user do |f|  %>
+		<%= f.label :name%>:
+		<%= f.text_field :name %>
+
+		<%= f.label :email%>:
+		<%= f.email_field :email %>
+
+		<%= f.label :password%>:
+		<%= f.password_field :password %>
+
+		<%= f.label :password_confirmation%>:
+		<%= f.text_field :password_confirmation %>
+
+	<%= f.submit %>
+
+  <label for='form-switch'>Already Member ? Sign In Now..</label>
+  <% end %>
+</div>
